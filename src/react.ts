@@ -31,11 +31,11 @@ let didWarnAboutEqualityFn = false
 
 const identity = <T>(arg: T): T => arg
 
-export function useStore<S extends WithReact<StoreApi<unknown>>>(
+export function useStore<S extends WithReact<ReadonlyStoreApi<unknown>>>(
   api: S,
 ): ExtractState<S>
 
-export function useStore<S extends WithReact<StoreApi<unknown>>, U>(
+export function useStore<S extends WithReact<ReadonlyStoreApi<unknown>>, U>(
   api: S,
   selector: (state: ExtractState<S>) => U,
 ): U
@@ -44,14 +44,14 @@ export function useStore<S extends WithReact<StoreApi<unknown>>, U>(
  * @deprecated The usage with three arguments is deprecated. Use `useStoreWithEqualityFn` from 'zustand/traditional'. The usage with one or two arguments is not deprecated.
  * https://github.com/pmndrs/zustand/discussions/1937
  */
-export function useStore<S extends WithReact<StoreApi<unknown>>, U>(
+export function useStore<S extends WithReact<ReadonlyStoreApi<unknown>>, U>(
   api: S,
   selector: (state: ExtractState<S>) => U,
   equalityFn: ((a: U, b: U) => boolean) | undefined,
 ): U
 
 export function useStore<TState, StateSlice>(
-  api: WithReact<StoreApi<TState>>,
+  api: WithReact<ReadonlyStoreApi<TState>>,
   selector: (state: TState) => StateSlice = identity as any,
   equalityFn?: (a: StateSlice, b: StateSlice) => boolean,
 ) {
